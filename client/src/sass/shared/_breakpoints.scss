@@ -1,0 +1,16 @@
+$bpXsMin: 0;
+$bpSmMin: 576px;
+$bpMdMin: 750px;
+$bpDtMin: 1024px;
+$bpDtLMin: 1440px;
+/*$bpDtLMin: 1423px;*/
+$bpDtXLMin: 1920px;
+
+:export {
+  bpXsMin: $bpXsMin;
+  bpSmMin: $bpSmMin;
+  bpMdMin: $bpMdMin;
+  bpDtMin: $bpDtMin;
+  bpDtLMin: $bpDtLMin;
+  bpDtXLMin: $bpDtXLMin;
+}
