@@ -1,11 +1,7 @@
 @import "../../../../sass/shared/breakpoints";
 .row {
   display: flex;
-
-  @media (min-width: $bpSmMin) {
-    margin-right: -5px;
-    margin-left: -5px;
-  }
+  flex-wrap: wrap;
 }
 
 .flex-row {
