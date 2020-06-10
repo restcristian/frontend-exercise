@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Input.module.scss";
+import { isEmpty } from "../../../../utils/utils";
 
 const DefaultInput = ({
   testId,
@@ -38,16 +39,22 @@ const DefaultInput = ({
     }
   };
 
+  const onBlurHandler = () => {
+    if (isEmpty(value)) {
+      setIsFocused(false);
+    }
+  };
+
   return (
     <div className={getStyleClasses()}>
       <input
-        className={styles.defaultInput}
+        className={customClass + " " + styles.defaultInput}
         data-test-id={`input-${testId}`}
         onChange={handleInputChange}
         type={password ? "password" : "text"}
         value={value}
         onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        onBlur={onBlurHandler}
       />
       <span className={styles.label}>{placeholder}</span>
     </div>
@@ -67,6 +74,7 @@ DefaultInput.propTypes = {
   regex: PropTypes.instanceOf(RegExp),
   hasError: PropTypes.bool,
   customClass: PropTypes.string,
+  password: PropTypes.bool,
 };
 
 export default DefaultInput;
