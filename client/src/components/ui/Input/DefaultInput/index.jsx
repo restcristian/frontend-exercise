@@ -49,7 +49,7 @@ const DefaultInput = ({
     <div className={getStyleClasses()}>
       <input
         className={customClass + " " + styles.defaultInput}
-        data-test-id={`input-${testId}`}
+        data-testid={`input-${testId}`}
         onChange={handleInputChange}
         type={password ? "password" : "text"}
         value={value}

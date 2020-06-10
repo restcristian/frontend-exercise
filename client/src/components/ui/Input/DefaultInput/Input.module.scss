@@ -16,11 +16,20 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: $color-black;
   }
-  &.isFocused {
+  &.isFocused,
+  &.hasError {
     .label {
       top: -8px;
       transform: translateY(0);
       font-size: 12px;
+    }
+  }
+  &.hasError {
+    .defaultInput {
+      border-color: $color-red1;
+    }
+    .label {
+      color: $color-red1;
     }
   }
 }

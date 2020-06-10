@@ -19,7 +19,7 @@ const Button = ({ onClick, testId, primary, children, customClass, full }) => {
     <button
       className={customClass + " " + getStyleClass()}
       onClick={onClick}
-      data-test-id={`button-${testId}`}
+      data-testid={`button-${testId}`}
     >
       {children}
     </button>
