@@ -3,6 +3,8 @@ import { Container, Row, Col } from "../../components/mod/FlexGrid";
 import { PlusIcon } from "../../components/ui/Icon";
 import Button from "../../components/ui/Button";
 import styles from "./Recipes.module.scss";
+import { getPreparationTime } from "../../utils/utils";
+import Rate from "../../components/ui/Rate";
 
 const Recipes = () => {
   const initialRecipes = [
@@ -158,14 +160,17 @@ const Recipes = () => {
               alt={recipe.headline}
             />
             <div className={styles.recipeExtaContent}>
-              <span>{recipe.calories}</span>
-              <span>/</span>
-              <span>{recipe.time}</span>
+              <div className={styles.recipeExtaContentWrapper}>
+                <span>{recipe.calories}</span>
+                <span>/</span>
+                <span>{getPreparationTime(recipe.time)}</span>
+              </div>
             </div>
           </div>
           <div className={styles.recipeContent}>
             <h3 className={styles.recipeName}>{recipe.name}</h3>
             <p className={styles.recipeHeadline}>{recipe.headline}</p>
+            <Rate initialValue={recipe.rating} />
           </div>
         </div>
       </Col>

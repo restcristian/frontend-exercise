@@ -5,9 +5,7 @@ import Layout from "./components/mod/Layout";
 
 function App() {
   const renderRoutes = () =>
-    routes.map(({ path, component }) => (
-      <Route key={path} path={path} component={component} />
-    ));
+    routes.map((route) => <Route key={route.path} {...route} />);
   return (
     <div className="App">
       <Switch>

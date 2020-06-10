@@ -1,0 +1,43 @@
+@import "../../../sass/shared/colors";
+.rateContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.rateButton {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+
+  &.fullStar {
+    svg polygon {
+      opacity: 1;
+    }
+  }
+
+  &.halfStar {
+    svg polygon {
+      &:nth-child(1) {
+        opacity: 1;
+      }
+    }
+  }
+
+  svg {
+    width: 30px;
+    margin: 0 2px;
+
+    path {
+      fill: $color-primary !important;
+    }
+
+    polygon {
+      fill: $color-primary !important;
+      opacity: 0;
+    }
+  }
+}
