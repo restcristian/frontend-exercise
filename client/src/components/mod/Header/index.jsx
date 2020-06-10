@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col } from "../FlexGrid";
+import Button from "../../ui/Button";
 import Logo from "../../../assets/HelloFreshLogo.svg";
 import styles from "./Header.module.scss";
 
@@ -16,7 +17,7 @@ const Header = () => {
             </div>
           </Col>
           <Col customClass={styles.loginCol} textAlign="right">
-            <button>log in</button>
+            <Button onClick={() => console.log("click")}>Log In</Button>
           </Col>
         </Row>
       </div>
