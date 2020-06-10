@@ -1,6 +1,8 @@
+@import "../../sass/shared/colors";
+
 .loginContainer {
   max-width: 611px;
-  padding: 30px;
+  padding: 20px 10px;
   margin: 0 auto;
-  background-color: white;
+  background-color: $color-white;
 }

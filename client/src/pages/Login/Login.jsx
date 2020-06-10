@@ -8,16 +8,22 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    console.log("submitted");
+  };
   return (
     <div className={styles.loginContainer}>
       <form action="POST">
         <Row>
-          <Col>
+          <Col xs={12}>
             <DefaultInput
               inputOnChange={(email) => setState({ ...state, email })}
               placeholder="Email*"
               value={state.email}
             />
+          </Col>
+          <Col xs={12}>
             <DefaultInput
               inputOnChange={(password) => setState({ ...state, password })}
               placeholder="Password*"
@@ -25,9 +31,12 @@ const Login = () => {
               value={state.password}
             />
           </Col>
-          <Button primary full>
-            Log In
-          </Button>
+
+          <Col xs={12}>
+            <Button primary full onClick={onSubmitHandler}>
+              Log In
+            </Button>
+          </Col>
         </Row>
       </form>
     </div>
