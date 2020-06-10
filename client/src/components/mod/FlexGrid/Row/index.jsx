@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import styles from "./Row.module.scss";
 
-const Row = ({ justifyContent, customClass, children }) => {
+const Row = ({ justifyContent, alignItems, customClass, children }) => {
   return (
     <div
       className={
@@ -11,6 +11,7 @@ const Row = ({ justifyContent, customClass, children }) => {
         (justifyContent
           ? " " + styles["justify-content-" + justifyContent]
           : "") +
+        (alignItems ? " " + styles["align-items-" + justifyContent] : "") +
         (customClass ? " " + customClass : "")
       }
     >
@@ -21,6 +22,7 @@ const Row = ({ justifyContent, customClass, children }) => {
 
 Row.propTypes = {
   justifyContent: PropTypes.string,
+  alignItems: PropTypes.string,
   customClass: PropTypes.string,
 };
 
