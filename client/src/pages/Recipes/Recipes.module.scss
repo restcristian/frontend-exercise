@@ -1,0 +1,88 @@
+@import "../../sass/shared/colors";
+.recipesContainer {
+}
+
+.recipeCard {
+  margin-bottom: 24px;
+}
+
+.recipeImageContainer {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 66.761%; // Makes sure images are always of the same size
+  background-color: $color-gray1;
+  overflow: hidden;
+  border-radius: 2px;
+
+  .toggleButton {
+    position: absolute;
+    top: 12px;
+    right: 5px;
+    z-index: 2;
+    outline: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      svg path {
+        fill: $color-white;
+      }
+    }
+    svg {
+      width: 30px;
+      path {
+        fill: $color-green1;
+      }
+    }
+  }
+  .recipeImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color-gray1;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.recipeExtaContent {
+  position: absolute;
+  top: 0;
+  left: calc(100% - 40px);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: $color-white;
+  transition: all 0.2s ease-in-out;
+}
+
+.recipeContent {
+  font-family: Monserrat, Verdana, Geneva, Tahoma, sans-serif;
+  padding-top: 8px;
+  .recipeName {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .recipeHeadline {
+    font-size: 12px;
+    color: $color-gray1;
+  }
+}
+
+.openCard {
+  .recipeExtaContent {
+    left: 0;
+  }
+  .toggleButton {
+    transform: rotate(-135deg);
+  }
+}
