@@ -1,5 +1,5 @@
 import * as constant from "./constant";
-import Login from "../pages/Login/Login";
+import Login from "../pages/Login";
 export default [
   {
     path: "/",

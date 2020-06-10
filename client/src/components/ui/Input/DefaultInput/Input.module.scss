@@ -15,6 +15,7 @@
     font-weight: 400;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: $color-black;
+    pointer-events: none;
   }
   &.isFocused,
   &.hasError {
