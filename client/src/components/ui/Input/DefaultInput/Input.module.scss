@@ -1,0 +1,46 @@
+@import "../../../../sass/shared/colors";
+
+.inputContainer {
+  position: relative;
+  margin: 24px 0;
+
+  .label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    padding: 0 12px;
+    transform: translateY(-50%);
+    background-color: $color-white;
+    transition: all 0.2s ease-in-out;
+    font-weight: 400;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: $color-black;
+  }
+  &.isFocused {
+    .label {
+      top: -8px;
+      transform: translateY(0);
+      font-size: 12px;
+    }
+  }
+  &.password {
+    .defaultInput {
+      background-color: red;
+    }
+  }
+}
+.defaultInput {
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  padding: 12px 8px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+  font-weight: 400px;
+  border: 1px solid $color-gray1;
+  border-radius: 5px;
+  display: block;
+  width: 100%;
+}
