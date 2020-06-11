@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col } from "../../components/mod/FlexGrid";
 import { PlusIcon, HeartIcon } from "../../components/ui/Icon";
@@ -10,22 +10,28 @@ import {
   fetchRecipes,
   rateRecipe,
   toggleFavoriteRecipe,
+  emptyRecipes,
 } from "../../store/Recipes/actions";
 import RequiresAuth from "../../components/mod/RequiresAuth";
 
 const Recipes = () => {
   const recipeRefs = useRef([]);
+  const [page, setPage] = useState(0);
   const { recipes, allRecipesFetched } = useSelector(
     ({ recipesReducer }) => recipesReducer
   );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    loadRecipes();
+    loadRecipes(page);
+    return () => {
+      dispatch(emptyRecipes());
+    };
   }, []);
 
   const loadRecipes = () => {
-    dispatch(fetchRecipes());
+    dispatch(fetchRecipes(page));
+    setPage(page + 1);
   };
 
   const getToggleFavoriteClasses = (recipeIdx) => {
@@ -48,7 +54,7 @@ const Recipes = () => {
         <div
           data-testid="recipe-card"
           className={styles.recipeCard}
-          ref={(ref) => recipeRefs.current.push(ref)}
+          ref={(ref) => (recipeRefs.current[idx] = ref)}
         >
           <div className={styles.recipeImageContainer}>
             <button

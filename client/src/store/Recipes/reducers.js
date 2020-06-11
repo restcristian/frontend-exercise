@@ -8,17 +8,21 @@ import {
   TOGGLE_FAVORITE_RECIPE,
   TOGGLE_FAVORITE_RECIPE_FAILED,
   TOGGLE_FAVORITE_RECIPE_SUCCESS,
+  EMPTY_RECIPES,
 } from "./types";
 
 const initialState = {
   recipes: [],
   loading: null,
-  page: 0,
   allRecipesFetched: false,
 };
 
 const reducers = (state = initialState, action) => {
   switch (action.type) {
+    case EMPTY_RECIPES:
+      return {
+        ...initialState,
+      };
     case FETCH_RECIPES:
     case RATE_RECIPE:
     case TOGGLE_FAVORITE_RECIPE:
@@ -28,12 +32,10 @@ const reducers = (state = initialState, action) => {
       };
     case FETCH_RECIPES_SUCCESS:
       const allRecipesFetched = action.payload.length === 0;
-      const deltaPage = action.payload.length === 0 ? 0 : 1;
       return {
         ...state,
         recipes: [...state.recipes, ...action.payload],
         loading: false,
-        page: state.page + deltaPage,
         allRecipesFetched,
       };
     case TOGGLE_FAVORITE_RECIPE_FAILED:

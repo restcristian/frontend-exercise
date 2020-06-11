@@ -9,13 +9,13 @@ import {
   TOGGLE_FAVORITE_RECIPE,
   TOGGLE_FAVORITE_RECIPE_SUCCESS,
   TOGGLE_FAVORITE_RECIPE_FAILED,
+  EMPTY_RECIPES,
 } from "./types";
 
-import recipesReducer from "../../store/Recipes";
 import authReducer from "../../store/Auth";
 import { formatToken } from "../../utils/utils";
 
-const getRecipes = async (state) => {
+const getRecipes = async (page, state) => {
   try {
     const config = {
       headers: {
@@ -23,12 +23,8 @@ const getRecipes = async (state) => {
         "Content-Type": "application/json",
       },
     };
-    const recipes = (
-      await axios.get(
-        `/api/v1/recipes?page=${state[recipesReducer.NAME].page}`,
-        config
-      )
-    ).data;
+    const recipes = (await axios.get(`/api/v1/recipes?page=${page}`, config))
+      .data;
     return recipes;
   } catch (error) {
     throw new Error(error);
@@ -76,14 +72,14 @@ const updateFavorite = async (id, state) => {
     throw new Error(error);
   }
 };
-export const fetchRecipes = () => {
+export const fetchRecipes = (page) => {
   return async (dispatch, getState) => {
     await dispatch({
       type: FETCH_RECIPES,
     });
 
     try {
-      const payload = await getRecipes(getState());
+      const payload = await getRecipes(page, getState());
       await dispatch({
         type: FETCH_RECIPES_SUCCESS,
         payload,
@@ -135,3 +131,5 @@ export const toggleFavoriteRecipe = (id) => {
     }
   };
 };
+
+export const emptyRecipes = () => ({ type: EMPTY_RECIPES });
