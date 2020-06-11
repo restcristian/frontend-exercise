@@ -11,6 +11,8 @@
   width: 100%;
   height: 0;
   padding-top: 66.761%; // Makes sure images are always of the same size
+  padding-left: 24px;
+  padding-right: 24px;
   background-color: $color-gray1;
   overflow: hidden;
   border-radius: 2px;
@@ -37,6 +39,24 @@
       width: 30px;
       path {
         fill: $color-green1;
+      }
+    }
+  }
+
+  .toggleFavoriteButton {
+    position: absolute;
+    top: 50px;
+    right: 5px;
+    z-index: 2;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    &:hover {
+      svg path {
+        fill: $color-white;
       }
     }
   }

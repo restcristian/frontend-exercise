@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Container, Row, Col } from "../../components/mod/FlexGrid";
-import { PlusIcon } from "../../components/ui/Icon";
+import { PlusIcon, HeartIcon } from "../../components/ui/Icon";
 import Button from "../../components/ui/Button";
 import styles from "./Recipes.module.scss";
 import { getPreparationTime } from "../../utils/utils";
@@ -135,6 +135,12 @@ const Recipes = () => {
     console.log("recipies loaded");
   };
 
+  const getToggleFavoriteClasses = (recipeIdx) => {
+    const classes = [styles.toggleFavoriteButton];
+
+    return classes.join(" ");
+  };
+
   const toggleRecipeExtrainfo = (recipeRef) => {
     recipeRef.classList.toggle(styles.openCard);
   };
@@ -152,6 +158,9 @@ const Recipes = () => {
               onClick={() => toggleRecipeExtrainfo(recipeRefs.current[idx])}
             >
               <PlusIcon />
+            </button>
+            <button className={getToggleFavoriteClasses(idx)}>
+              <HeartIcon />
             </button>
             <img
               className={styles.recipeImage}
