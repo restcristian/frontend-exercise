@@ -15,7 +15,20 @@ const updateRating = (req, res) => {
   res.send(recipe);
 };
 
+const toggleFavorite = (req, res) => {
+  const { id } = req.params;
+  const recipe = recipes.find((item) => item.id === id);
+
+  if (recipe.hasOwnProperty("isFavorite")) {
+    recipe.isFavorite = recipe.isFavorite ? false : true;
+  } else {
+    recipe.isFavorite = true;
+  }
+  res.send(recipe);
+};
+
 module.exports = {
   getAll,
   updateRating,
+  toggleFavorite,
 };

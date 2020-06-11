@@ -5,6 +5,9 @@ import {
   RATE_RECIPE,
   RATE_RECIPE_FAILED,
   RATE_RECIPE_SUCCESS,
+  TOGGLE_FAVORITE_RECIPE,
+  TOGGLE_FAVORITE_RECIPE_FAILED,
+  TOGGLE_FAVORITE_RECIPE_SUCCESS,
 } from "./types";
 
 const initialState = {
@@ -16,6 +19,7 @@ const reducers = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_RECIPES:
     case RATE_RECIPE:
+    case TOGGLE_FAVORITE_RECIPE:
       return {
         ...state,
         loading: true,
@@ -26,6 +30,7 @@ const reducers = (state = initialState, action) => {
         recipes: [...action.payload],
         loading: false,
       };
+    case TOGGLE_FAVORITE_RECIPE_FAILED:
     case FETCH_RECIPES_FAILED:
     case RATE_RECIPE_FAILED:
       return {
@@ -39,10 +44,20 @@ const reducers = (state = initialState, action) => {
         (currentRecipe) => currentRecipe.id === action.payload.id
       );
 
-      console.log(recipe);
-
       recipe.rating = action.payload.rating;
 
+      return {
+        ...state,
+        recipes: [...clonedRecipes],
+      };
+    }
+
+    case TOGGLE_FAVORITE_RECIPE_SUCCESS: {
+      const clonedRecipes = [...state.recipes];
+      const recipe = clonedRecipes.find(
+        (currentRecipe) => currentRecipe.id === action.payload.id
+      );
+      recipe.isFavorite = action.payload.isFavorite;
       return {
         ...state,
         recipes: [...clonedRecipes],

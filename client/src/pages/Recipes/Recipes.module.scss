@@ -54,7 +54,8 @@
     border: none;
     outline: none;
 
-    &:hover {
+    &:hover,
+    &.isFilled {
       svg path {
         fill: $color-white;
       }

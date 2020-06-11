@@ -6,7 +6,11 @@ import Button from "../../components/ui/Button";
 import styles from "./Recipes.module.scss";
 import { getPreparationTime } from "../../utils/utils";
 import Rate from "../../components/ui/Rate";
-import { fetchRecipes, rateRecipe } from "../../store/Recipes/actions";
+import {
+  fetchRecipes,
+  rateRecipe,
+  toggleFavoriteRecipe,
+} from "../../store/Recipes/actions";
 
 const Recipes = () => {
   const recipeRefs = useRef([]);
@@ -22,7 +26,11 @@ const Recipes = () => {
   };
 
   const getToggleFavoriteClasses = (recipeIdx) => {
-    const classes = [styles.toggleFavoriteButton];
+    let classes = [styles.toggleFavoriteButton];
+
+    if (recipes[recipeIdx].isFavorite) {
+      classes = [...classes, styles.isFilled];
+    }
 
     return classes.join(" ");
   };
@@ -45,7 +53,12 @@ const Recipes = () => {
             >
               <PlusIcon />
             </button>
-            <button className={getToggleFavoriteClasses(idx)}>
+            <button
+              className={getToggleFavoriteClasses(idx)}
+              onClick={() => {
+                dispatch(toggleFavoriteRecipe(recipe.id));
+              }}
+            >
               <HeartIcon />
             </button>
             <img
