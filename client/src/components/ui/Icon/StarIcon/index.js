@@ -19,7 +19,6 @@ const StarIcon = () => {
         />
         <polygon
           className="st1"
-          style="fill:#B98D82"
           style={{ fill: "#B98D82" }}
           points="252,22.3 326.6,173.5 493.6,197.8 372.8,315.5 401.3,481.7 252,403.3 	"
         />
