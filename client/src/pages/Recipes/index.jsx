@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col } from "../../components/mod/FlexGrid";
 import { PlusIcon, HeartIcon } from "../../components/ui/Icon";
@@ -101,6 +102,9 @@ const Recipes = () => {
   };
   return (
     <div className={styles.recipesContainer}>
+      <Helmet>
+        <title>Recipes | HelloFresh Exercise</title>
+      </Helmet>
       <Container>
         <h2 data-testid="recipes-header-text" className={styles.headerText}>
           Recipes

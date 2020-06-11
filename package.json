@@ -4,7 +4,11 @@
   "description": "HelloFreshGO - Front-end Exercise =============================================",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "start": "node server.js",
+    "dev:client": "npm run start --prefix client",
+    "dev:server": "nodemon server.js",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client \"",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
@@ -23,6 +27,7 @@
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
+    "concurrently": "^5.2.0",
     "nodemon": "^2.0.4"
   }
 }

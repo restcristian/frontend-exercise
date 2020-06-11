@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "../../components/mod/FlexGrid";
 import Button from "../../components/ui/Button";
@@ -95,6 +96,9 @@ const Login = ({ history }) => {
   };
   return (
     <div className={styles.loginContainer}>
+      <Helmet>
+        <title>Login | HelloFresh Exercise</title>
+      </Helmet>
       <h2 className={styles.headerText}>Log in</h2>
       <form action="POST">
         <Row>
