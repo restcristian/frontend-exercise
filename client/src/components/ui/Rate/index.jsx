@@ -17,7 +17,7 @@ const Rate = ({ initialValue, testId, onRateChange }) => {
   };
   const onClickHandler = (idx) => {
     setValue(idx + 1);
-    // onRateChange(idx + 1);
+    onRateChange(idx + 1);
   };
   const renderStars = () => {
     const stars = Array(size)

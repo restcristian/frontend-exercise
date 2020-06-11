@@ -170,7 +170,14 @@ const Recipes = () => {
           <div className={styles.recipeContent}>
             <h3 className={styles.recipeName}>{recipe.name}</h3>
             <p className={styles.recipeHeadline}>{recipe.headline}</p>
-            <Rate initialValue={recipe.rating} />
+            <Rate
+              initialValue={recipe.rating}
+              onRateChange={(value) => {
+                const clonedRecipes = [...recipes];
+                clonedRecipes[idx].rating = value;
+                setRecipes(clonedRecipes);
+              }}
+            />
           </div>
         </div>
       </Col>
