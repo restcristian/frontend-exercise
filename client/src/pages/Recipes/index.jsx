@@ -102,6 +102,9 @@ const Recipes = () => {
   return (
     <div className={styles.recipesContainer}>
       <Container>
+        <h2 data-testid="recipes-header-text" className={styles.headerText}>
+          Recipes
+        </h2>
         <Row>
           {renderRecipes()}
           {!allRecipesFetched && recipes.length > 0 && (

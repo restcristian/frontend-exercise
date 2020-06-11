@@ -4,12 +4,16 @@ import Rate from "./";
 
 describe("<Rate />", () => {
   test("Renders without errors", () => {
-    const { getAllByTestId } = render(<Rate initialValue={5}></Rate>);
+    const { getAllByTestId } = render(
+      <Rate onRateChange={jest.fn()} initialValue={5}></Rate>
+    );
     const rateButtons = getAllByTestId("rate-button");
     expect(rateButtons).toBeDefined();
   });
   test("When value is passed, stars corresponding classes are styled", () => {
-    const { getAllByTestId } = render(<Rate initialValue={3}></Rate>);
+    const { getAllByTestId } = render(
+      <Rate onRateChange={jest.fn()} initialValue={3}></Rate>
+    );
     const rateButtons = getAllByTestId("rate-button");
     const fullStarClassPattern = /fullStar/;
 
@@ -21,7 +25,9 @@ describe("<Rate />", () => {
   });
 
   test("When a star is clicked, the star corresponding classes are styled", () => {
-    const { getAllByTestId } = render(<Rate initialValue={3}></Rate>);
+    const { getAllByTestId } = render(
+      <Rate onRateChange={jest.fn()} initialValue={3}></Rate>
+    );
     const rateButtons = getAllByTestId("rate-button");
     const fullStarClassPattern = /fullStar/;
 
