@@ -1,0 +1,34 @@
+@import "../../sass/shared/colors";
+
+.loginContainer {
+  max-width: 611px;
+  padding: 24px 10px;
+  margin: 0 auto;
+  background-color: $color-white;
+  border: 1px solid $color-gray2;
+
+  .headerText {
+    text-align: center;
+    padding: 0 0 12px 0;
+    font-family: Monserrat, Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+  }
+
+  .errorListContainer {
+    border: 1px solid $color-red1;
+    margin-top: 12px;
+    padding: 12px;
+    color: $color-red1;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .errorListTitle {
+    font-weight: bold;
+    display: block;
+  }
+
+  .errorList {
+    font-size: 12px;
+  }
+}

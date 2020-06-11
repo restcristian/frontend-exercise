@@ -1,0 +1,28 @@
+@import "../../../sass/shared/breakpoints";
+@import "../../../sass/shared/colors";
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+
+  .wrapper {
+    background-color: $color-white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    min-height: 60px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
+
+  .row {
+    align-items: center;
+  }
+
+  .imgWrapper {
+    img {
+      height: 30px;
+    }
+  }
+}
