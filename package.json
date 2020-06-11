@@ -1,0 +1,26 @@
+{
+  "name": "hellofresh-server",
+  "version": "1.0.0",
+  "description": "HelloFreshGO - Front-end Exercise =============================================",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/restcristian/frontend-exercise.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/restcristian/frontend-exercise/issues"
+  },
+  "homepage": "https://github.com/restcristian/frontend-exercise#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
