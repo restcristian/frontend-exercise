@@ -19,7 +19,8 @@ const getRecipes = async (state) => {
   try {
     const config = {
       headers: {
-        authorization: formatToken(state[authReducer.NAME].token),
+        Authorization: formatToken(state[authReducer.NAME].token),
+        "Content-Type": "application/json",
       },
     };
     const recipes = (
@@ -37,7 +38,8 @@ const getRecipes = async (state) => {
 const updateRating = async (id, rating, state) => {
   const config = {
     headers: {
-      authorization: formatToken(state[authReducer.NAME].token),
+      Authorization: formatToken(state[authReducer.NAME].token),
+      "Content-Type": "application/json",
     },
   };
   try {
@@ -61,7 +63,8 @@ const updateRating = async (id, rating, state) => {
 const updateFavorite = async (id, state) => {
   const config = {
     headers: {
-      authorization: formatToken(state[authReducer.NAME].token),
+      Authorization: formatToken(state[authReducer.NAME].token),
+      "Content-Type": "application/json",
     },
   };
   try {

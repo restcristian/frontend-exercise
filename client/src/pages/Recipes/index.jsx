@@ -11,6 +11,7 @@ import {
   rateRecipe,
   toggleFavoriteRecipe,
 } from "../../store/Recipes/actions";
+import RequiresAuth from "../../components/mod/RequiresAuth";
 
 const Recipes = () => {
   const recipeRefs = useRef([]);
@@ -110,4 +111,4 @@ const Recipes = () => {
   );
 };
 
-export default Recipes;
+export default RequiresAuth(Recipes);

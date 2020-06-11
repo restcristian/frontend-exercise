@@ -1,13 +1,20 @@
-const verifyToken = (req, res, next) => {
-  const bearer = req.headers["authorization"];
+const jwt = require("jsonwebtoken");
+const { SECRET_KEY } = process.env;
 
-  if (typeof bearer !== "undefined") {
-    const bearerToken = bearer.split(" ")[1];
-    req.token = bearerToken;
-    next();
-  } else {
-    res.sendStatus(403);
+const verifyToken = (req, res, next) => {
+  const bearer = req.headers.authorization;
+
+  if (!bearer) {
+    return res.status(403);
   }
+  const bearerToken = bearer.split(" ")[1];
+
+  try {
+    req.token = jwt.verify(bearerToken, SECRET_KEY);
+  } catch (error) {
+    return res.status(403);
+  }
+  next();
 };
 
 module.exports = {
