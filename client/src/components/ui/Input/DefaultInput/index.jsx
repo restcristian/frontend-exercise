@@ -22,7 +22,7 @@ const DefaultInput = ({
     if (password) {
       classes = [...classes, styles.password];
     }
-    if (isFocused) {
+    if (isFocused || !isEmpty(value)) {
       classes = [...classes, styles.isFocused];
     }
     return classes.join(" ");

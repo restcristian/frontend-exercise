@@ -18,7 +18,7 @@ const Login = ({ history }) => {
     errors: {},
   };
   const [state, setState] = useState(initialState);
-  const { auth } = useSelector((state) => state.authReducer);
+  const { auth, errorMessage } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const Login = ({ history }) => {
   const renderErrorList = () => {
     const { errors } = state;
     const errorKeys = Object.keys(errors);
-    if (errorKeys.length > 0) {
+    if (errorKeys.length > 0 || !isEmpty(errorMessage)) {
       return (
         <div className={styles.errorListContainer}>
           <span className={styles.errorListTitle}>
@@ -85,6 +85,7 @@ const Login = ({ history }) => {
             {errorKeys.map((key) => (
               <li key={key}>{errors[key].message}</li>
             ))}
+            {!isEmpty(errorMessage) && <li>{errorMessage}</li>}
           </ul>
         </div>
       );

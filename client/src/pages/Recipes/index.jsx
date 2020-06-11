@@ -23,7 +23,7 @@ const Recipes = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    loadRecipes(page);
+    loadRecipes();
     return () => {
       dispatch(emptyRecipes());
     };

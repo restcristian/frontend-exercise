@@ -20,6 +20,7 @@ const reducers = (state = initialState, action) => {
         token: action.payload,
         loading: false,
         auth: true,
+        errorMessage: "",
       };
     case LOGIN_FAILED:
       return {

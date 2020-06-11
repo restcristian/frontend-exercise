@@ -47,6 +47,7 @@ export const loginUser = (username, password) => {
 
 export const logoutUser = () => {
   return async (dispatch) => {
+    await logoutRequest();
     dispatch({
       type: LOGOUT,
     });
