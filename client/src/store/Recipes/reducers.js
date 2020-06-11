@@ -14,6 +14,7 @@ const initialState = {
   recipes: [],
   loading: null,
   page: 0,
+  allRecipesFetched: false,
 };
 
 const reducers = (state = initialState, action) => {
@@ -26,11 +27,14 @@ const reducers = (state = initialState, action) => {
         loading: true,
       };
     case FETCH_RECIPES_SUCCESS:
+      const allRecipesFetched = action.payload.length === 0;
+      const deltaPage = action.payload.length === 0 ? 0 : 1;
       return {
         ...state,
         recipes: [...state.recipes, ...action.payload],
         loading: false,
-        page: state.page + 1,
+        page: state.page + deltaPage,
+        allRecipesFetched,
       };
     case TOGGLE_FAVORITE_RECIPE_FAILED:
     case FETCH_RECIPES_FAILED:

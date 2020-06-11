@@ -14,7 +14,9 @@ import {
 
 const Recipes = () => {
   const recipeRefs = useRef([]);
-  const { recipes } = useSelector(({ recipesReducer }) => recipesReducer);
+  const { recipes, allRecipesFetched } = useSelector(
+    ({ recipesReducer }) => recipesReducer
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -94,9 +96,11 @@ const Recipes = () => {
       <Container>
         <Row>
           {renderRecipes()}
-          <Col xs={12} textAlign="center">
-            <Button onClick={loadRecipes}>Load More</Button>
-          </Col>
+          {!allRecipesFetched && (
+            <Col xs={12} textAlign="center">
+              <Button onClick={loadRecipes}>Load More</Button>
+            </Col>
+          )}
         </Row>
       </Container>
     </div>
