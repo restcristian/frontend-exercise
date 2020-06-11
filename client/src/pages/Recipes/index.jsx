@@ -6,7 +6,7 @@ import Button from "../../components/ui/Button";
 import styles from "./Recipes.module.scss";
 import { getPreparationTime } from "../../utils/utils";
 import Rate from "../../components/ui/Rate";
-import { fetchRecipes } from "../../store/Recipes/actions";
+import { fetchRecipes, rateRecipe } from "../../store/Recipes/actions";
 
 const Recipes = () => {
   const recipeRefs = useRef([]);
@@ -57,7 +57,7 @@ const Recipes = () => {
             <div className={styles.recipeExtaContent}>
               <div className={styles.recipeExtaContentWrapper}>
                 <span>{recipe.calories}</span>
-                <span>/</span>
+                {recipe.calories ? <span>/</span> : null}
                 <span>{getPreparationTime(recipe.time)}</span>
               </div>
             </div>
@@ -67,10 +67,8 @@ const Recipes = () => {
             <p className={styles.recipeHeadline}>{recipe.headline}</p>
             <Rate
               initialValue={recipe.rating}
-              onRateChange={(value) => {
-                const clonedRecipes = [...recipes];
-                clonedRecipes[idx].rating = value;
-                // setRecipes(clonedRecipes);
+              onRateChange={(rating) => {
+                dispatch(rateRecipe(recipe.id, rating));
               }}
             />
           </div>
