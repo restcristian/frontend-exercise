@@ -11,12 +11,16 @@ import {
   TOGGLE_FAVORITE_RECIPE_FAILED,
 } from "./types";
 
-const getRecipes = async () => {
+import recipesReducer from "../../store/Recipes";
+
+const getRecipes = async (state) => {
   try {
-    const recipes = (await axios.get("/api/v1/recipes")).data;
+    const recipes = (
+      await axios.get(`/api/v1/recipes?page=${state[recipesReducer.NAME].page}`)
+    ).data;
     return recipes;
   } catch (error) {
-    throw new Error();
+    throw new Error(error);
   }
 };
 
@@ -45,13 +49,13 @@ const updateFavorite = async (id) => {
   }
 };
 export const fetchRecipes = () => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     await dispatch({
       type: FETCH_RECIPES,
     });
 
     try {
-      const payload = await getRecipes();
+      const payload = await getRecipes(getState());
       await dispatch({
         type: FETCH_RECIPES_SUCCESS,
         payload,

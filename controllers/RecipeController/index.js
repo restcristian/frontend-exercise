@@ -1,7 +1,13 @@
 const recipes = require("../../recipes.json");
+const queryString = require("querystring");
 
 const getAll = (req, res) => {
-  res.send(recipes);
+  const page = parseInt(req.query.page);
+  const SIZE = 6;
+  const clonedRecipes = [...recipes];
+  const slicedRecipes = clonedRecipes.slice(page * SIZE, (page + 1) * SIZE);
+
+  res.send(slicedRecipes);
 };
 
 const updateRating = (req, res) => {

@@ -13,6 +13,7 @@ import {
 const initialState = {
   recipes: [],
   loading: null,
+  page: 0,
 };
 
 const reducers = (state = initialState, action) => {
@@ -27,8 +28,9 @@ const reducers = (state = initialState, action) => {
     case FETCH_RECIPES_SUCCESS:
       return {
         ...state,
-        recipes: [...action.payload],
+        recipes: [...state.recipes, ...action.payload],
         loading: false,
+        page: state.page + 1,
       };
     case TOGGLE_FAVORITE_RECIPE_FAILED:
     case FETCH_RECIPES_FAILED:

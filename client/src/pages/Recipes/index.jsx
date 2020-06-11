@@ -15,14 +15,14 @@ import {
 const Recipes = () => {
   const recipeRefs = useRef([]);
   const { recipes } = useSelector(({ recipesReducer }) => recipesReducer);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchRecipes());
+    loadRecipes();
   }, []);
 
-  const dispatch = useDispatch();
   const loadRecipes = () => {
-    console.log("recipies loaded");
+    dispatch(fetchRecipes());
   };
 
   const getToggleFavoriteClasses = (recipeIdx) => {
