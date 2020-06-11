@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { StarIcon } from "../Icon";
 import styles from "./Rate.module.scss";
 
-const Rate = ({ initialValue, testId }) => {
-  const [value, setValue] = useState(0);
+const Rate = ({ initialValue, testId, onRateChange }) => {
+  const [value, setValue] = useState(initialValue);
   const size = 5;
-  useEffect(() => {
-    setValue(initialValue);
-  }, []);
   const getStarClasses = (starIdx) => {
     let classes = [styles.rateButton];
 
@@ -18,12 +15,21 @@ const Rate = ({ initialValue, testId }) => {
 
     return classes.join(" ");
   };
+  const onClickHandler = (idx) => {
+    setValue(idx + 1);
+    // onRateChange(idx + 1);
+  };
   const renderStars = () => {
     const stars = Array(size)
       .fill(0)
       .map((star, idx) => {
         return (
-          <button key={idx} className={getStarClasses(idx)}>
+          <button
+            key={idx}
+            className={getStarClasses(idx)}
+            onClick={() => onClickHandler(idx)}
+            data-testid={`rate-button`}
+          >
             <StarIcon />
           </button>
         );
@@ -32,7 +38,7 @@ const Rate = ({ initialValue, testId }) => {
     return stars;
   };
   return (
-    <div data-testId={testId} className={styles.rateContainer}>
+    <div data-testid={`rate-${testId}`} className={styles.rateContainer}>
       {renderStars()}
     </div>
   );
@@ -41,6 +47,6 @@ const Rate = ({ initialValue, testId }) => {
 Rate.propTypes = {
   testId: PropTypes.string,
   initialValue: PropTypes.number,
-  onChange: PropTypes.func,
+  onRateChange: PropTypes.func,
 };
 export default Rate;
