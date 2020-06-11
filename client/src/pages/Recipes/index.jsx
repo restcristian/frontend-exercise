@@ -45,6 +45,7 @@ const Recipes = () => {
     return recipes.map((recipe, idx) => (
       <Col key={recipe.id} md={4} sm={6} xs={12}>
         <div
+          data-testid="recipe-card"
           className={styles.recipeCard}
           ref={(ref) => recipeRefs.current.push(ref)}
         >
@@ -96,9 +97,11 @@ const Recipes = () => {
       <Container>
         <Row>
           {renderRecipes()}
-          {!allRecipesFetched && (
+          {!allRecipesFetched && recipes.length > 0 && (
             <Col xs={12} textAlign="center">
-              <Button onClick={loadRecipes}>Load More</Button>
+              <Button testId="load-more" onClick={loadRecipes}>
+                Load More
+              </Button>
             </Col>
           )}
         </Row>
