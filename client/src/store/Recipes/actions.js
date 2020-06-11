@@ -12,11 +12,21 @@ import {
 } from "./types";
 
 import recipesReducer from "../../store/Recipes";
+import authReducer from "../../store/Auth";
+import { formatToken } from "../../utils/utils";
 
 const getRecipes = async (state) => {
   try {
+    const config = {
+      headers: {
+        authorization: formatToken(state[authReducer.NAME].token),
+      },
+    };
     const recipes = (
-      await axios.get(`/api/v1/recipes?page=${state[recipesReducer.NAME].page}`)
+      await axios.get(
+        `/api/v1/recipes?page=${state[recipesReducer.NAME].page}`,
+        config
+      )
     ).data;
     return recipes;
   } catch (error) {
@@ -24,14 +34,23 @@ const getRecipes = async (state) => {
   }
 };
 
-const updateRating = async (id, rating) => {
+const updateRating = async (id, rating, state) => {
+  const config = {
+    headers: {
+      authorization: formatToken(state[authReducer.NAME].token),
+    },
+  };
   try {
     const recipe = (
-      await axios.put(`/api/v1/recipes/rate/${id}`, {
-        payload: {
-          rating,
+      await axios.put(
+        `/api/v1/recipes/rate/${id}`,
+        {
+          payload: {
+            rating,
+          },
         },
-      })
+        config
+      )
     ).data;
     return recipe;
   } catch (error) {
@@ -39,10 +58,16 @@ const updateRating = async (id, rating) => {
   }
 };
 
-const updateFavorite = async (id) => {
+const updateFavorite = async (id, state) => {
+  const config = {
+    headers: {
+      authorization: formatToken(state[authReducer.NAME].token),
+    },
+  };
   try {
-    const recipe = await (await axios.put(`/api/v1/recipes/favorite/${id}`))
-      .data;
+    const recipe = await (
+      await axios.put(`/api/v1/recipes/favorite/${id}`, null, config)
+    ).data;
     return recipe;
   } catch (error) {
     throw new Error(error);
@@ -69,13 +94,13 @@ export const fetchRecipes = () => {
 };
 
 export const rateRecipe = (id, rating) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     await dispatch({
       type: RATE_RECIPE,
     });
 
     try {
-      const payload = await updateRating(id, rating);
+      const payload = await updateRating(id, rating, getState());
       await dispatch({
         type: RATE_RECIPE_SUCCESS,
         payload,
@@ -89,13 +114,13 @@ export const rateRecipe = (id, rating) => {
 };
 
 export const toggleFavoriteRecipe = (id) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     await dispatch({
       type: TOGGLE_FAVORITE_RECIPE,
     });
 
     try {
-      const payload = await updateFavorite(id);
+      const payload = await updateFavorite(id, getState());
       await dispatch({
         type: TOGGLE_FAVORITE_RECIPE_SUCCESS,
         payload,

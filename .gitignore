@@ -24,3 +24,5 @@ yarn.lock
 # don't forget to ignore your compiled app directory
 # lib
 # dist
+
+.env

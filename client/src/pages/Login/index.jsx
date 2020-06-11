@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "../../components/mod/FlexGrid";
 import Button from "../../components/ui/Button";
 import { DefaultInput } from "../../components/ui/Input";
 import styles from "./Login.module.scss";
 import * as regex from "../../utils/regex";
 import { isEmpty } from "../../utils/utils";
+import { loginUser } from "../../store/Auth/actions";
 
 const Login = () => {
   const initialState = {
@@ -15,6 +17,8 @@ const Login = () => {
     errors: {},
   };
   const [state, setState] = useState(initialState);
+  const { auth, token } = useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
 
   const onSubmitHandler = (event) => {
     const { email, password } = state;
@@ -50,7 +54,7 @@ const Login = () => {
     }
 
     if (isValid) {
-      console.log("submit");
+      dispatch(loginUser(state.email, state.password));
       resetState();
     } else {
       setState(clonedState);
