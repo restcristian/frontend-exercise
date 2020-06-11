@@ -1,20 +1,22 @@
 import React from "react";
 import { withRouter, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Row, Col } from "../FlexGrid";
 import Button from "../../ui/Button";
 import Logo from "../../../assets/HelloFreshLogo.svg";
 import styles from "./Header.module.scss";
 import * as routes from "../../../routes/constant";
+import { logoutUser } from "../../../store/Auth/actions";
 
 const Header = ({ history }) => {
   const { auth } = useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
   const navigate = () => {
     history.push(routes.LOGIN_PAGE);
   };
 
   const logOut = () => {
-    console.log("log out");
+    dispatch(logoutUser());
   };
 
   return (

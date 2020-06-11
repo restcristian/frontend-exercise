@@ -20,7 +20,8 @@ const login = (req, res) => {
   }
 };
 const logout = (req, res) => {
-  res.send("logout");
+  req.token = "";
+  res.send({ message: "Logout" });
 };
 
 module.exports = { login, logout };

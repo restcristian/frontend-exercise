@@ -1,8 +1,8 @@
-import { LOGIN_START, LOGIN_FAILED, LOGIN_SUCCESS } from "./types";
+import { LOGIN_START, LOGIN_FAILED, LOGIN_SUCCESS, LOGOUT } from "./types";
 
 const initialState = {
   auth: false,
-  token: null,
+  token: "",
   errorMessage: "",
   loading: null,
 };
@@ -26,6 +26,12 @@ const reducers = (state = initialState, action) => {
         ...state,
         loading: false,
         errorMessage: action.payload,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        token: "",
+        auth: false,
       };
     default:
       return state;
