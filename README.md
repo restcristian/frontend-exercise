@@ -18,6 +18,7 @@ The application contains the following features:
 - Filter Favorite Recipes.
 - A Custom-made Rate Component.
 - A couple of unit tests.
+- Error 404.
 - Deployed on Heroku.
 
 ## Instructions to Run Locally
