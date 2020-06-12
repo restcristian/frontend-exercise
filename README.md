@@ -8,13 +8,14 @@ Full Stack application made for the Front-End Exercise provided by HelloFreshGo.
 
 The application contains the following features:
 
-- A NodeJS Backend with designated endpoints.
-- A FrontEnd built in React.
+- A NodeJS Back-End with designated endpoints.
+- A Front-End built in React.
 - State Management using Redux.
 - A Custom Grid System built on React reusable components.
 - SCSS as a pre-processor for styling and animations, while using CSS-Modules.
 - JSON Web Token to protect endpoints from outside the application's scope as well as for authentication.
 - Client-side form validation on the Login Page.
+- Filter Favorite Recipes.
 - A Custom-made Rate Component.
 - A couple of unit tests.
 - Deployed on Heroku.
@@ -38,7 +39,7 @@ SECRET_KEY=YOUR_SECRET_KEY
 
 This key is for serializing and deserializing a JSON Web Token for the user when they log in in order to access the protected resources.
 
-5. On the root directory of the project, run the following command to run both the server and the client with one single script.
+5. On the **root** directory of the project, run the following command to run both the server and the client with one single script.
 
 ```
 npm run dev
@@ -95,5 +96,13 @@ For the purporse of the test, you can only login with the following credentials:
 username: cristian.restituyo@gmail.com
 password: password
 ```
+
+### Future Improvements:
+
+> - [ ] Add lazy loading for Recipe images
+> - [ ] Animate Recipes Cards whike they load.
+> - [ ] Add a more generalized Error Handler
+> - [ ] Implement a complete authentication system, including database.
+> - [ ] Use HelloFresh actual API instead of returning JSON from the backend.
 
 Made with :heart by Cristian Restituyo
