@@ -1,11 +1,11 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent } from "../../utils/test-utils";
 import Login from ".";
 
 describe("<Login>", () => {
   describe("Validation", () => {
     test("When email is invalid, there should be errors", () => {
-      const { getByTestId } = render(<Login></Login>);
+      const { getByTestId } = render(<Login />);
       const emailInput = getByTestId("input-email");
       const passwordInput = getByTestId("input-password");
       const submit = getByTestId("button-submit");
@@ -19,7 +19,7 @@ describe("<Login>", () => {
     });
 
     test("When either email or password are empty there should be errors", () => {
-      const { getByTestId } = render(<Login></Login>);
+      const { getByTestId } = render(<Login />);
       const emailInput = getByTestId("input-email");
       const passwordInput = getByTestId("input-password");
       const submit = getByTestId("button-submit");

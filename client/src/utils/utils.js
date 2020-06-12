@@ -21,3 +21,5 @@ export const getPreparationTime = (str) => {
   }
   return `${time} ${metricStr}`;
 };
+
+export const formatToken = (token) => `Bearer ${token}`;

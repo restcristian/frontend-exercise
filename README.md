@@ -1,84 +1,108 @@
-HelloFreshGO - Front-end Exercise
-=============================================
+# HelloFreshGO - Front-end Exercise
 
-Hello and thanks for taking the time to try out the Front-end Developer test.
+Full Stack application made for the Front-End Exercise provided by HelloFreshGo. The Project consists of a small example of login and once inside, a list of Recipes will be displayed.
 
-The goal of this test is to assert your coding, UI, HTML and CSS skills (to some degree).
+[https://hffrontend.herokuapp.com/recipes](https://hffrontend.herokuapp.com/recipes)
 
-Feel more than free to add any particular technique or algorithm at any point, which you think might enrich the overall quality of the end result. Take as much time as you want on the test, **please do over-engineer**, we would like to assess all your skills!
+## Features
 
-_Note: While we love open source here at HelloFresh, please do not create a public repo with your test in! This challenge is only shared with people interviewing, and for obvious reasons we'd like it to remain this way._
+The application contains the following features:
 
-Instructions
-------------
+- A NodeJS Back-End with designated endpoints.
+- A Front-End built in React.
+- State Management using Redux.
+- A Custom Grid System built on React reusable components.
+- SCSS as a pre-processor for styling and animations, while using CSS-Modules.
+- JSON Web Token to protect endpoints from outside the application's scope as well as for authentication.
+- Client-side form validation on the Login Page.
+- Filter Favorite Recipes.
+- A Custom-made Rate Component.
+- A couple of unit tests.
+- Deployed on Heroku.
+
+## Instructions to Run Locally
 
 1. Clone this repo.
-2. Create a new `dev` branch, or create a fork of this repo.
-3. Write your code, in various commits so we can see your development timeline. We won't be looking at the time each task took you. We're much more interested in your train of thought!
-4. When finished, create a Pull Request with set-up instructions and an explanation for your solution.
-5. Reply to the thread you're having with our HR department telling us that we may start reviewing your code. We'll be expecting the results within a week's time.
+2. Then, on the root directory run the following command:
 
-Requirements
-------------
+```
+npm install
+```
 
-- You *MUST* write your test with modern HTML and JS (ES6 or ES7, so no TypeScript, CoffeeScript or other superset languages)
-- You *COULD* use javascript frameworks (React, Vue, etc..)
-- Your code *MUST* be in english (variable names, comments etc..)
-- You *MAY* comment your code wherever you feel necessary
-- You *SHOULD* use webpack
-- You *MAY* design something nice, but you *COULD* also copy your designs from our [website](https://www.hellofresh.com/recipes/)
-- You *SHOULD NOT* use jQuery, Twitter's Bootstrap or any other CSS framework
-- You *SHOULD* use a CSS preprocessor or postprocessor, when you use CSS
-- You *COULD* use CSS-in-JS
-- You *SHOULD* use some kind of server to serve your code, something like [http-server](https://github.com/indexzero/http-server) would do
-- You *SHOULD NOT* commit any external libraries and files into PR
+3. Do the same thing, but navigate to the **client** folder.
 
-Exercise
---------
+4. On the **root** directory, add an _.env_ file with the following info:
 
-In this test we will build a recipe review area.
+```
+SECRET_KEY=YOUR_SECRET_KEY
+```
 
-It will contain two pages:
+This key is for serializing and deserializing a JSON Web Token for the user when they log in in order to access the protected resources.
 
-- [Login page](#login-page)
-- [Recipe review page](#recipe-review-page)
+5. On the **root** directory of the project, run the following command to run both the server and the client with one single script.
 
-#### Login page
+```
+npm run dev
+```
 
-Implement a login page with a form to login, it doesn't have to actually log you in or do any checks, but things like e-mail validation are appreciated!
+6. If you are interested on the tests, you can run:
 
-#### Recipe overview page
+```
+npm run test
+```
 
-This will show all the recipes that are attached.
+## API Documentation
 
-The following should be true for this page:
+The application is built under a small NodeJS backend, and uses the following endpoints:
 
-- All the recipes will be displayed here
-- The recipes have to be shown with the data in the JSON displayed in a user-friendly way. At least the recipe's `name`, `headline`, `image`, `calories` and `time` need to be displayed.
-- Each recipe can be favorited or unfavorited
-- Each recipe can be rated
+<table>
+  <tr>
+    <th>METHOD</th>
+    <th>ENDPOINT</th>
+    <th>DESCRIPTION</th>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/api/v1/auth</td>
+    <td>Logs in a user with credentials.</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>/api/v1/auth/logout</td>
+    <td>Logs out an user.</td>
+  </tr>
+  
+  <tr>
+    <td>GET</td>
+    <td>/api/v1/recipes?page=page</td>
+    <td>Gets paginated Recipes.</td>
+  </tr>
+  <tr>
+    <td>PUT</td>
+    <td>/api/v1/recipes/favorite/:id</td>
+    <td>Mark a Recipe as favorite.</td>
+  </tr>
+  <tr>
+    <td>PUT</td>
+    <td>/api/v1/recipes/rate/:id</td>
+    <td>Rates a Recipe.</td>
+  </tr>
+ 
+</table>
 
-Evaluation Criteria
--------------------
+For the purporse of the test, you can only login with the following credentials:
 
-**IMPORTANT**: Building a back-end or adding a database to this test is optional. Although, it's perfectly fine to approach this test as a refined front-end prototype.
+```
+username: cristian.restituyo@gmail.com
+password: password
+```
 
-- The app must run.
-- Your app is lean and mean (small files that make the page look good).
-- You implemented a proper grid.
-- Your app is responsive.
-- Your app is well structured.
-- You implemented the rating functionality without using a third-party library.
+### Future Improvements:
 
-Bonus points
+> - [ ] Add lazy loading for Recipe images
+> - [ ] Animate Recipes Cards whike they load.
+> - [ ] Add a more generalized Error Handler
+> - [ ] Implement a complete authentication system, including database.
+> - [ ] Use HelloFresh actual API instead of returning JSON from the backend.
 
-- You wrote unit tests for your JavaScript.
-- Your application is an SPA.
-- You wrote server side code instead of using a utility application like `http-server`.
-- You implement actual endpoints to request the recipe data.
-- You use our own API instead of the JSON file, read how to do that [here](./USE_THE_API.md).
-- Your app is deployed to Github Pages or some other hosting.
-- Your application is isomporphic/universal.
-- You implemented actual authentication with the use of passport or something similar.
-
-Good luck, and have fun!
+Made with :heart by Cristian Restituyo

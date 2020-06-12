@@ -19,6 +19,12 @@ const Rate = ({ initialValue, testId, onRateChange }) => {
     setValue(idx + 1);
     onRateChange(idx + 1);
   };
+  const onMouseEnterHandler = (idx) => {
+    setValue(idx + 1);
+  };
+  const onMouseLeaveHandler = (idx) => {
+    setValue(initialValue);
+  };
   const renderStars = () => {
     const stars = Array(size)
       .fill(0)
@@ -28,6 +34,8 @@ const Rate = ({ initialValue, testId, onRateChange }) => {
             key={idx}
             className={getStarClasses(idx)}
             onClick={() => onClickHandler(idx)}
+            onMouseEnter={() => onMouseEnterHandler(idx)}
+            onMouseLeave={() => onMouseLeaveHandler(idx)}
             data-testid={`rate-button`}
           >
             <StarIcon />

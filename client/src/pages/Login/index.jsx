@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
+import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "../../components/mod/FlexGrid";
 import Button from "../../components/ui/Button";
 import { DefaultInput } from "../../components/ui/Input";
 import styles from "./Login.module.scss";
 import * as regex from "../../utils/regex";
+import * as routes from "../../routes/constant";
 import { isEmpty } from "../../utils/utils";
+import { loginUser } from "../../store/Auth/actions";
 
-const Login = () => {
+const Login = ({ history }) => {
   const initialState = {
     email: "",
     password: "",
@@ -15,6 +19,14 @@ const Login = () => {
     errors: {},
   };
   const [state, setState] = useState(initialState);
+  const { auth, errorMessage } = useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (auth) {
+      history.push(routes.RECIPES_PAGE);
+    }
+  }, [history, auth]);
 
   const onSubmitHandler = (event) => {
     const { email, password } = state;
@@ -50,7 +62,7 @@ const Login = () => {
     }
 
     if (isValid) {
-      console.log("submit");
+      dispatch(loginUser(state.email, state.password));
       resetState();
     } else {
       setState(clonedState);
@@ -64,7 +76,7 @@ const Login = () => {
   const renderErrorList = () => {
     const { errors } = state;
     const errorKeys = Object.keys(errors);
-    if (errorKeys.length > 0) {
+    if (errorKeys.length > 0 || !isEmpty(errorMessage)) {
       return (
         <div className={styles.errorListContainer}>
           <span className={styles.errorListTitle}>
@@ -74,6 +86,7 @@ const Login = () => {
             {errorKeys.map((key) => (
               <li key={key}>{errors[key].message}</li>
             ))}
+            {!isEmpty(errorMessage) && <li>{errorMessage}</li>}
           </ul>
         </div>
       );
@@ -83,6 +96,9 @@ const Login = () => {
   };
   return (
     <div className={styles.loginContainer}>
+      <Helmet>
+        <title>Login | HelloFresh Exercise</title>
+      </Helmet>
       <h2 className={styles.headerText}>Log in</h2>
       <form action="POST">
         <Row>

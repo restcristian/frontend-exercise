@@ -1,0 +1,33 @@
+{
+  "name": "hellofresh-server",
+  "version": "1.0.0",
+  "description": "HelloFreshGO - Front-end Exercise =============================================",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev:client": "npm run start --prefix client",
+    "dev:server": "nodemon server.js",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client \"",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/restcristian/frontend-exercise.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/restcristian/frontend-exercise/issues"
+  },
+  "homepage": "https://github.com/restcristian/frontend-exercise#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4"
+  }
+}
