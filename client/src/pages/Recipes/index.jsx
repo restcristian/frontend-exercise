@@ -1,12 +1,9 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col } from "../../components/mod/FlexGrid";
-import { PlusIcon, HeartIcon } from "../../components/ui/Icon";
 import Button from "../../components/ui/Button";
 import styles from "./Recipes.module.scss";
-import { getPreparationTime } from "../../utils/utils";
-import Rate from "../../components/ui/Rate";
 import {
   fetchRecipes,
   rateRecipe,
@@ -14,10 +11,12 @@ import {
   emptyRecipes,
 } from "../../store/Recipes/actions";
 import RequiresAuth from "../../components/mod/RequiresAuth";
+import RecipeCard from "../../components/ui/RecipeCard";
+import CheckBoxInput from "../../components/ui/Input/CheckBoxInput";
 
 const Recipes = () => {
-  const recipeRefs = useRef([]);
   const [page, setPage] = useState(0);
+  const [showFavorites, setShowFavorites] = useState(false);
   const { recipes, allRecipesFetched } = useSelector(
     ({ recipesReducer }) => recipesReducer
   );
@@ -35,70 +34,49 @@ const Recipes = () => {
     setPage(page + 1);
   };
 
-  const getToggleFavoriteClasses = (recipeIdx) => {
-    let classes = [styles.toggleFavoriteButton];
-
-    if (recipes[recipeIdx].isFavorite) {
-      classes = [...classes, styles.isFilled];
-    }
-
-    return classes.join(" ");
-  };
-
-  const toggleRecipeExtrainfo = (recipeRef) => {
-    recipeRef.classList.toggle(styles.openCard);
-  };
-
   const renderRecipes = () => {
-    return recipes.map((recipe, idx) => (
-      <Col key={recipe.id} md={4} sm={6} xs={12}>
-        <div
-          data-testid="recipe-card"
-          className={styles.recipeCard}
-          ref={(ref) => (recipeRefs.current[idx] = ref)}
-        >
-          <div className={styles.recipeImageContainer}>
-            <button
-              className={styles.toggleButton}
-              onClick={() => toggleRecipeExtrainfo(recipeRefs.current[idx])}
-            >
-              <PlusIcon />
-            </button>
-            <button
-              className={getToggleFavoriteClasses(idx)}
-              onClick={() => {
-                dispatch(toggleFavoriteRecipe(recipe.id));
-              }}
-            >
-              <HeartIcon />
-            </button>
-            <img
-              className={styles.recipeImage}
-              src={recipe.image}
-              data-image={recipe.image}
-              alt={recipe.headline}
-            />
-            <div className={styles.recipeExtaContent}>
-              <div className={styles.recipeExtaContentWrapper}>
-                <span>{recipe.calories}</span>
-                {recipe.calories ? <span>/</span> : null}
-                <span>{getPreparationTime(recipe.time)}</span>
-              </div>
-            </div>
-          </div>
-          <div className={styles.recipeContent}>
-            <h3 className={styles.recipeName}>{recipe.name}</h3>
-            <p className={styles.recipeHeadline}>{recipe.headline}</p>
-            <Rate
-              initialValue={recipe.rating}
+    if (showFavorites) {
+      return recipes.map((recipe) => {
+        return (
+          recipe.isFavorite && (
+            <RecipeCard
+              key={recipe.id}
+              recipe={recipe}
               onRateChange={(rating) => {
                 dispatch(rateRecipe(recipe.id, rating));
               }}
+              toggleFavoriteHandler={() => {
+                dispatch(toggleFavoriteRecipe(recipe.id));
+              }}
             />
-          </div>
-        </div>
-      </Col>
+          )
+        );
+      });
+    }
+    return recipes.map((recipe) => (
+      <RecipeCard
+        key={recipe.id}
+        recipe={recipe}
+        onRateChange={(rating) => {
+          dispatch(rateRecipe(recipe.id, rating));
+        }}
+        toggleFavoriteHandler={() => {
+          dispatch(toggleFavoriteRecipe(recipe.id));
+        }}
+      />
     ));
+  };
+
+  const renderLoadMoreBtn = () => {
+    return showFavorites
+      ? null
+      : !allRecipesFetched && recipes.length > 0 && (
+          <Col xs={12} textAlign="center">
+            <Button testId="load-more" onClick={loadRecipes}>
+              Load More
+            </Button>
+          </Col>
+        );
   };
   return (
     <div className={styles.recipesContainer}>
@@ -110,14 +88,15 @@ const Recipes = () => {
           Recipes
         </h2>
         <Row>
+          <Col xs={12} textAlignMd="right" textAlign="center">
+            <CheckBoxInput
+              checked={showFavorites}
+              labelText="Show Favorites Only:"
+              onChange={() => setShowFavorites(!showFavorites)}
+            />
+          </Col>
           {renderRecipes()}
-          {!allRecipesFetched && recipes.length > 0 && (
-            <Col xs={12} textAlign="center">
-              <Button testId="load-more" onClick={loadRecipes}>
-                Load More
-              </Button>
-            </Col>
-          )}
+          {renderLoadMoreBtn()}
         </Row>
       </Container>
     </div>
